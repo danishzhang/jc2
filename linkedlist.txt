@@ -1,0 +1,13 @@
+DECLARE DataArr : ARRAY[0:6] OF INTEGERS
+DECLARE PointArr : ARRAY[0:6] OF INTEGERS
+DECLARE Hpointer, Spointer, i : INTEGER
+hPointer <- 0
+sPointer <- -1
+
+#SETUP FOR LINKED LIST
+FOR i <- 0 TO LENGTH(PointArr)
+    PointerArr[i] <- i + 1
+NEXT i
+
+PointerArr[6] <- -1
+
