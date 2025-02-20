@@ -35,3 +35,10 @@ if SearchTree(item) != -1:
 else:
     print("Item is not found in the Tree")
 
+def Insertion():
+    newitempointer = fPointer
+    if fPointer == -1:
+        print("The tree is full")
+    else:
+
+# if freepointer is pointing to 0, the new item pointer will be our new rootpointer.
