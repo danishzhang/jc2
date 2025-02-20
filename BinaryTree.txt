@@ -1,0 +1,23 @@
+# Write a code for declaratoion a record stucture for the node of a binary tree
+# Write a code for declaration of an array of type node
+
+TYPE Node 
+    DECLARE left : INTEGER 
+    DECLARE data :INTEGER 
+    DECLARE right : INTEGER
+ENDTYPE
+
+# Pointers must always be integer only
+
+DECLARE BinaryTree : ARRAY [0:9] OF Node
+DECLARE Rpointer, Fpointer : INTEGER
+
+FOR i <- 0 TO 9
+    BinaryTree[i].left <- -1
+    BinaryTree[i].data <- i+1
+    BinaryTree[i].right <- -1
+NEXT i 
+
+BinaryTree[9].data <- -1
+
+
