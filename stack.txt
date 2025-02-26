@@ -1,0 +1,26 @@
+# STACK PSEUDOCODE
+
+DECLARE stack : ARRAY [0:4] OF INTEGER
+DECLARE top, low : INTEGER
+
+low <- 0
+top <- -1
+
+PROCEDURE pop()
+    IF top = -1
+        THEN OUTPUT "THe stack is empty"
+    ELSE 
+        OUTPUT "The item popped out is ", stack[top]
+        stack[top] <- "None"
+        top <- top - 1
+    ENDIF
+ENDPROCEDURE
+
+PROCEDURE push(item: INTEGER)
+    IF top = LENGTH(stack)-1
+        THEN OUTPUT "Stack is full"
+    ELSE
+        top <- top + 1
+        stack[top] <- item
+    ENDIF
+ENDPROCEDURE

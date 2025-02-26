@@ -1,0 +1,35 @@
+# PSEUDOCODE for QUEUE
+
+DECLARE array : ARRAY [0:4] OF INTEGER
+DECLARE lenofcue, rear, front, maxsize : INTEGER
+
+lenofcue <- 0
+rear <- -1
+front <- 0
+maxsize <- LENGTH(array)
+
+PROCEDURE enqueue(item: INTEGER)
+    IF lenofcure = maxsize
+        OUTPUT "THe queue is full"
+    ELSE IF rear = maxsize -1
+        rear <- 0
+    ELSE
+        rear <- rear + 1
+        array[rear] <- item
+        lenofcue <- lenofcue + 1
+    ENDIF
+ENDPROCEDURE
+
+PROCEDURE dequeue()
+    IF lenofcue = 0
+        OUTPUT "The queue is already empty, unable to remove"
+    ELSE IF front = maxsize - 1
+        front <- 0
+    ELSE
+        array[front] <- "None"
+        front <- front + 1
+        lenofcue <- lenofcue - 1
+    ENDIF
+ENDPROCEDURE
+
+INPUT item
