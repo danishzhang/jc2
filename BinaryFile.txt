@@ -1,0 +1,95 @@
+TYPE StudentRec:
+    DECLARE StudentID :INTEGER
+    DECLARE Name : STRING
+ENDTYPE
+
+DECLARE Student1 : StudentRec
+DECLARE StudentFile : STRING
+StudentFile <-- "StudentInfo.dat"
+
+
+//Serial Files #How to store and read a record
+OPENFILE StudentFile FOR APPEND
+
+INPUT Student1.StudentID
+WHILE Student1.StudentID <> -1 DO
+    OUTPUT "Enter Student Name: "
+    INPUT Student1.Name
+    PUTRECORD StudentFile, Student1
+    OUTPUT "Enter Student ID: "
+    INPUT Student1.StudentID
+ENDWHILE
+CLOSEFILE StudentFile
+
+OPENFILE StudentFiler FOR READ
+WHILE NOT EOF(StudentFile) DO
+    GETRECORD StudentFile, Student1
+    OUTPUT StudentFile, Student1
+ENDWHILE
+CLOSE StudentFile
+
+
+// Sequential File
+DECLARE Student1 : StudentRec
+DECLARE StudentFile : STRING
+StudentNewFile <- "StudentTemp.dat"
+StudentFile <- "StudentInfo.dat"
+
+OPENFILE StudentFile FOR READ
+OPENFILE StudentNewFile FOR WRITE
+
+#Since it's sequential, cannot append directly
+
+OUTPUT "Enter Student ID: "
+INPUT Student1.StudentID
+OUTPUT "Enter Student Name: " 
+INPUT Student1.Name
+RecAdded <- FALSE
+
+WHILE RecAdded = FALSE OR NOT EOF(StudentFile)
+    GETRECORD StudentFile, StudentTemp # Read the record from StudentFile
+    IF StudentTemp.StudentID < Student1.StudentID THEN
+        PUTRECORD StudentNewFile, StudentTemp
+    ELSE
+        PUTRECORD StudentNewFile, Student1
+        RecAdded <- TRUE
+    ENDIF
+ENDWHILE
+
+IF EOF(StudentFile) THEN
+    PUTRECORD StudentNewFile, StudentTemp
+ELSE
+    WHILE NOT EOF(StudentFile)
+        GETRECORD StudentFile, StudentTemp
+        PUTRECORD StudentNewFile, StudentTemp
+    ENDWHILE
+ENDIF
+
+
+CLOSEFILE StudentFile
+CLOSEFILE StudentNewFile
+DELETE StudentFile
+RENAME StudentNewFile, StudentFile
+
+// Random File
+DECLARE Student1 : StudentRec
+DECLARE StudentFile : STRING
+DECLARE Address : INTEGER
+StudentFile <- "StudentInfo.dat"
+
+OPENFILE StudentFile FOR RANDOM
+
+OUTPUT "Enter Student ID: "
+INPUT Student1.StudentID
+OUTPUT "Enter Student Name: " 
+INPUT Student1.Name
+
+Address <- Hash(Student1.StudentID) #It generates the address 
+SEEK(StudentFile, Address) # use this command to move the pointer; finding the address in the student file and take the pointer to that address
+
+PUTRECORD StudentFile, Student1 
+// GETRECORD StudentFile, Student1
+
+CLOSEFILE StudentFile
+
+# Open hash check whether the next record is free (From Chapter 13: Open Hash, Close Hash)

@@ -1,0 +1,64 @@
+CLASS Person
+    PRIVATE Name : STRING
+    PRIVATE Age  : INTEGER
+    PUBLIC PRODECURE NEW(PName : STRING, AGE : INTEGER) # Name of constructor must always be NEW
+        Name <- PName
+        Age <- PAge
+    ENDPROCEDURE
+
+    # works as SETTER
+    PUBLIC PROCEDURE SetName(PName : STRING) 
+        Name <- PName
+    ENDPROCEDURE
+
+    # works as GETTER
+    PUBLIC FUNCTION GetName() RETURNS STRING
+        RETURN Name
+    ENDFUNCTION
+
+    PUBIC FUNCTION GetAge() RETURNS INTEGER
+        RETURN Age
+    ENDFUCTION 
+ENDCLASS
+
+
+CLASS Student INHERITS Person
+    PRIVATE Grade : CHAR 
+    PUBLIC PROCEDURE NEW(PName : STRING, PAge : INTEGER, PGrade : CHAR)
+        SUPER.NEW(PName, PAge)
+        Grade <- PGrade
+    ENDPROCEDURE
+
+    # works as SETTER
+    PUBLIC PROCEDURE SetGrade(PGrade : CHAR) 
+        Grade <- PGrade
+    ENDPROCEDURE
+
+    # works as GETTER
+    PUBLIC FUNCTION GetGrade() RETURNS STRING
+        RETURN Grade
+    ENDFUNCTION
+ENDCLASS
+
+Student1 <- NEW Student("Ken", 10, 'A')
+
+OUTPUT Student1.GetName()
+OUTPUT Student1.GetAge()
+
+Student.SetGrade('B')
+
+
+
+// Exception Handling
+
+TRY
+    OPENFILE StudentFile FOR READ
+EXCEPT 
+    OUTPUT "File not found!"
+ENDTRY
+
+TRY
+    Quot <- Num1/Num2
+EXCEPT
+    OUTPUT "Division by Zero is not allowed"
+ENDTRY
