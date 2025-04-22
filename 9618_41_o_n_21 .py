@@ -27,12 +27,13 @@ myArr = [Picture("",0,0,"") for i in range(100)]
 def ReadData():
     index = 0
     file = open('Pictures.txt','r' )
-    tempdesc = file.readline().strip()
-    while tempdesc != "":
-        tempheight = file.readline().strip()
+    tempdesc = file.readline().strip() 
+    while tempdesc != "": # while the description isn't empty
+        tempheight = file.readline().strip() # read all the values
         tempwidth = file.readline().strip()
         tempcolour = file.readline().strip()
+        # input these values obtained from text file into the array
         myArr[index] = Picture(tempdesc, tempheight, tempwidth, tempcolour)
         index = index + 1
-        tempdesc = file.readline().strip()
+        tempdesc = file.readline().strip() # remove the white spaces
 
